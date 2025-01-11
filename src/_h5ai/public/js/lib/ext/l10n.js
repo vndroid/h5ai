@@ -39,7 +39,7 @@ const blockTpl =
         `<div class="block">
             <h1 class="l10n-language">Language</h1>
             <div class="select">
-                <select id="langs"/>
+                <select id="langs" name="langs" title="language"/>
             </div>
         </div>`;
 const optionTpl = '<option/>';
