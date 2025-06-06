@@ -5,15 +5,30 @@ const allsettings = require('../core/settings');
 const win = global.window;
 const settings = Object.assign({
     enabled: false,
-    id: 'UA-000000-0'
-}, allsettings['google-analytics-ua']);
+    id: 'G-0000000000'
+}, allsettings['google-tag-id']);
 
+// GA4 新版统计代码
 const snippet = () => {
     /* eslint-disable */
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    // 创建 dataLayer 和 gtag 函数
+    win.dataLayer = win.dataLayer || [];
+    win.gtag = function() { win.dataLayer.push(arguments); };
+    
+    // 设置当前时间戳
+    win.gtag('js', new Date());
+    
+    // 创建 GA4 配置
+    win.gtag('config', settings.id, {
+        send_page_view: false, // 禁用自动页面浏览跟踪
+        transport_type: 'beacon' // 使用 beacon API 发送数据
+    });
+    
+    // 动态加载 gtag.js 脚本
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = `https://www.googletagmanager.com/gtag/js?id=${settings.id}`;
+    document.head.appendChild(script);
     /* eslint-enable */
 };
 
@@ -22,15 +37,22 @@ const init = () => {
         return;
     }
 
+    // 初始化 GA4
     snippet();
 
-    win.ga('create', settings.id, 'auto');
-
+    // 监听路由变化事件
     event.sub('location.changed', item => {
         const loc = win.location;
-        win.ga('send', 'pageview', {
-            location: loc.protocol + '//' + loc.host + item.absHref,
-            title: map(item.getCrumb(), i => i.label).join(' > ')
+        
+        // 构建页面信息
+        const pageLocation = `${loc.protocol}//${loc.host}${item.absHref}`;
+        const pageTitle = map(item.getCrumb(), i => i.label).join(' > ');
+        
+        // 发送 GA4 页面浏览事件
+        win.gtag('event', 'page_view', {
+            page_location: pageLocation,
+            page_title: pageTitle,
+            page_path: item.absHref
         });
     });
 };
