@@ -29,9 +29,10 @@ const init = () => {
 
     snippet();
 
-    // GA4 配置（禁用自动页面浏览跟踪）
+    // GA4 配置
     win.gtag('config', settings.id, {
-        send_page_view: false  // 禁用自动页面浏览事件
+        send_page_view: false,  // 禁用自动页面浏览事件
+        cookie_flags: 'SameSite=None; Secure'  // 设置 cookie 标志
     });
 
     event.sub('location.changed', item => {
