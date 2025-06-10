@@ -5,16 +5,21 @@ const allsettings = require('../core/settings');
 const win = global.window;
 const settings = Object.assign({
     enabled: false,
-    id: 'UA-000000-0'
-}, allsettings['google-analytics-ua']);
+    id: 'G-0000000000'  // GA4 测量 ID (格式 G-XXXXXXXXXX)
+}, allsettings['google-tag-id']);
 
 const snippet = () => {
-    /* eslint-disable */
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-    /* eslint-enable */
+    // 新的 GA4 gtag.js 代码段
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = `https://www.googletagmanager.com/gtag/js?id=${settings.id}`;
+    document.head.appendChild(script);
+
+    win.dataLayer = win.dataLayer || [];
+    win.gtag = function() {
+        dataLayer.push(arguments);
+    };
+    win.gtag('js', new Date());
 };
 
 const init = () => {
@@ -24,13 +29,20 @@ const init = () => {
 
     snippet();
 
-    win.ga('create', settings.id, 'auto');
+    // GA4 配置（禁用自动页面浏览跟踪）
+    win.gtag('config', settings.id, {
+        send_page_view: false  // 禁用自动页面浏览事件
+    });
 
     event.sub('location.changed', item => {
         const loc = win.location;
-        win.ga('send', 'pageview', {
-            location: loc.protocol + '//' + loc.host + item.absHref,
-            title: map(item.getCrumb(), i => i.label).join(' > ')
+        const pagePath = item.absHref;
+        
+        // 发送 GA4 页面浏览事件
+        win.gtag('event', 'page_view', {
+            page_title: map(item.getCrumb(), i => i.label).join(' > '),
+            page_location: `${loc.protocol}//${loc.host}${pagePath}`,
+            page_path: pagePath
         });
     });
 };

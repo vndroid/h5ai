@@ -172,9 +172,9 @@
 
     - id: string, account ID
     */
-    "google-analytics-ua": {
+    "google-tag-id": {
         "enabled": false,
-        "id": "UA-000000-0"
+        "id": "G-0000000000"
     },
 
     /*
