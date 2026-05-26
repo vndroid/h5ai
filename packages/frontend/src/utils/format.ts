@@ -24,11 +24,10 @@ export function formatSize(bytes: number | null, binaryPrefix = false): string {
 export function formatDate(timeMs: number, viewOptions?: ViewOptions): string {
   if (!timeMs) return '—';
   const d = new Date(timeMs);
-  return d.toLocaleString(undefined, {
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-    hour: '2-digit',
-    minute: '2-digit',
-  });
+  const yyyy = d.getFullYear();
+  const mm   = String(d.getMonth() + 1).padStart(2, '0');
+  const dd   = String(d.getDate()).padStart(2, '0');
+  const hh   = String(d.getHours()).padStart(2, '0');
+  const min  = String(d.getMinutes()).padStart(2, '0');
+  return `${yyyy}-${mm}-${dd} ${hh}:${min}`;
 }

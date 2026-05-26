@@ -27,9 +27,20 @@ export default function FileView({ items, currentHref, onNavigate }: Props) {
   const displayItems = searchActive && searchResults ? searchResults : items;
   const sorted = useSortedItems(displayItems);
 
-  const SortHeader = ({ col, label }: { col: 'name' | 'time' | 'size'; label: string }) => (
+  const SortHeader = ({
+    col,
+    label,
+    align,
+    width,
+  }: {
+    col: 'name' | 'time' | 'size';
+    label: string;
+    align?: 'right';
+    width?: number;
+  }) => (
     <th
-      className={`${styles.th} ${sortColumn === col ? styles.sorted : ''}`}
+      className={[styles.th, sortColumn === col ? styles.sorted : '', align === 'right' ? styles.right : ''].join(' ')}
+      style={width ? { width } : undefined}
       onClick={() => toggleSort(col)}
       aria-sort={sortColumn === col ? (sortReverse ? 'descending' : 'ascending') : 'none'}
     >
@@ -51,8 +62,8 @@ export default function FileView({ items, currentHref, onNavigate }: Props) {
             <tr>
               <th className={styles.thIcon} />
               <SortHeader col="name" label={l10n['name'] ?? 'Name'} />
-              <SortHeader col="time" label={l10n['lastModified'] ?? 'Last modified'} />
-              <SortHeader col="size" label={l10n['size'] ?? 'Size'} />
+              <SortHeader col="time" label={l10n['lastModified'] ?? 'Last modified'} align="right" width={150} />
+              <SortHeader col="size" label={l10n['size'] ?? 'Size'} align="right" width={72} />
             </tr>
           </thead>
           <tbody>

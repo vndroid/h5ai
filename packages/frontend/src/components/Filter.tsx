@@ -1,5 +1,4 @@
 import { useStore } from '../store';
-import { Filter as FilterIcon } from 'lucide-react';
 import styles from './Filter.module.css';
 
 export default function FilterBar() {
@@ -7,7 +6,7 @@ export default function FilterBar() {
 
   return (
     <div className={styles.wrap}>
-      <FilterIcon size={14} className={styles.icon} />
+      <img src="/images/ui/filter.svg" alt="" width={24} height={24} className={styles.icon} />
       <input
         className={styles.input}
         type="text"

@@ -6,6 +6,7 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.07);
   cursor: pointer;
   transition: background 0.1s ease, box-shadow 0.1s ease;
+  height: 33px;
 }
 
 .row:hover {
@@ -19,18 +20,51 @@
   background: var(--col-selected-bg);
 }
 
-/* Icon cell — absolute positioned .square in original */
+/* Icon cell */
 .iconCell {
-  padding: 8px 8px 8px 16px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
+  width: 36px;
+  padding: 0;
+  vertical-align: middle;
 }
 
-.checkbox { cursor: pointer; }
+/* Inner wrapper carries the flex so td stays as table-cell */
+.iconWrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 33px;
+}
+
+/* Checkbox overlays the icon (out of flex flow) */
+.checkbox {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 2;
+  cursor: pointer;
+}
+
+/* Show checkbox on hover or when row is selected */
+.row:hover .checkbox,
+.row.selected .checkbox {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Fade icon when checkbox is visible */
+.row:hover .iconWrap img,
+.row.selected .iconWrap img {
+  opacity: 0.2;
+}
 
 /* Name cell */
 .name {
+  max-width: 0; /* required for overflow:hidden to work in table-layout:fixed */
   padding: 0 8px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -47,19 +81,19 @@
 
 /* Date + size: right-aligned, fixed widths like original */
 .date {
-  padding: 0 8px;
+  padding: 0 16px 0 8px;
   font-size: 13px;
   color: var(--col-text-sec);
   white-space: nowrap;
-  width: 130px;
+  width: 150px;
   text-align: right;
 }
 
 .size {
-  padding: 0 8px;
+  padding: 0 16px 0 8px;
   font-size: 13px;
   color: var(--col-text-sec);
   white-space: nowrap;
-  width: 80px;
+  width: 72px;
   text-align: right;
 }

@@ -3,7 +3,6 @@ import type { FileItem } from '@h5ai/types';
 import { apiGet } from '../api/client';
 import { useStore } from '../store';
 import styles from './Sidebar.module.css';
-import { ChevronRight, ChevronDown, Folder } from 'lucide-react';
 
 interface Props {
   currentHref: string;
@@ -75,10 +74,16 @@ export default function Sidebar({ currentHref, onNavigate }: Props) {
             onClick={() => void toggle(node)}
             aria-label={isExpanded ? 'Collapse' : 'Expand'}
           >
-            {isExpanded ? <ChevronDown size={12} /> : <ChevronRight size={12} />}
+            <img
+              src="/images/ui/tree-toggle.svg"
+              alt=""
+              width={16}
+              height={16}
+              style={{ transform: isExpanded ? 'rotate(90deg)' : 'none', transition: 'transform 0.15s ease' }}
+            />
           </button>
           <button className={styles.label} onClick={() => onNavigate(node.href)}>
-            <Folder size={14} className={styles.folderIcon} />
+            <img src="/images/themes/default/folder.svg" alt="" width={16} height={16} className={styles.folderIcon} />
             {node.name}
           </button>
         </div>

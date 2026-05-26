@@ -1,6 +1,5 @@
 import type { FileItem } from '@h5ai/types';
 import { useStore } from '../store';
-import { X } from 'lucide-react';
 import styles from './Preview.module.css';
 
 interface Props {
@@ -23,7 +22,7 @@ export default function Preview({ item }: Props) {
         <div className={styles.header}>
           <span className={styles.title}>{name}</span>
           <button className={styles.close} onClick={close}>
-            <X size={18} />
+            <img src="/images/ui/preview-close.svg" alt="close" width={20} height={20} />
           </button>
         </div>
         <div className={styles.body}>

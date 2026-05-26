@@ -3,7 +3,6 @@ import { useStore } from '../store';
 import { apiGet } from '../api/client';
 import type { FileItem } from '@h5ai/types';
 import styles from './Search.module.css';
-import { Search as SearchIcon, X } from 'lucide-react';
 
 interface Props {
   href: string;
@@ -51,7 +50,7 @@ export default function SearchBar({ href }: Props) {
 
   return (
     <div className={styles.wrap}>
-      <SearchIcon size={14} className={styles.icon} />
+      <img src="/images/ui/search.svg" alt="" width={24} height={24} className={styles.icon} />
       <input
         className={styles.input}
         type="text"
@@ -62,7 +61,7 @@ export default function SearchBar({ href }: Props) {
       {loading && <span className={styles.spinner} />}
       {query && (
         <button className={styles.clear} onClick={clear} type="button">
-          <X size={13} />
+          <img src="/images/ui/back.svg" alt="clear" width={16} height={16} />
         </button>
       )}
     </div>

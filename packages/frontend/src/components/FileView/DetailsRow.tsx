@@ -43,16 +43,18 @@ export default function DetailsRow({ item, size, onNavigate }: Props) {
       onClick={handleClick}
     >
       <td className={styles.iconCell}>
-        {options?.select.checkboxes && (
-          <input
-            type="checkbox"
-            className={styles.checkbox}
-            checked={isSelected}
-            onChange={handleCheckbox}
-            onClick={(e) => e.stopPropagation()}
-          />
-        )}
-        <FileIcon href={item.href} isFolder={isFolder} size={size} thumbSrc={item.thumbSrc} />
+        <div className={styles.iconWrap}>
+          {options?.select.checkboxes && (
+            <input
+              type="checkbox"
+              className={styles.checkbox}
+              checked={isSelected}
+              onChange={handleCheckbox}
+              onClick={(e) => e.stopPropagation()}
+            />
+          )}
+          <FileIcon href={item.href} isFolder={isFolder} size={20} thumbSrc={item.thumbSrc} />
+        </div>
       </td>
       <td className={styles.name} title={name}>
         <span className={styles.nameText}>{name}</span>

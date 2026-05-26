@@ -1,6 +1,3 @@
-import type { LucideProps } from 'lucide-react';
-import { Folder, File, FileText, Image, Music, Video, Archive, Code } from 'lucide-react';
-import type { ForwardRefExoticComponent, RefAttributes } from 'react';
 import { useFileType } from '../hooks/useFilters';
 
 interface Props {
@@ -8,27 +5,29 @@ interface Props {
   isFolder: boolean;
   size: number;
   thumbSrc?: string;
+  isParent?: boolean;
 }
 
-type LucideIcon = ForwardRefExoticComponent<Omit<LucideProps, 'ref'> & RefAttributes<SVGSVGElement>>;
-
-const TYPE_ICONS: Record<string, LucideIcon> = {
-  'txt': FileText,
-  'img': Image,
-  'aud': Music,
-  'vid': Video,
-  'ar': Archive,
-  'code': Code,
+/** Map type-key prefix → theme/default SVG filename */
+const TYPE_SVG: Record<string, string> = {
+  img: 'img',
+  aud: 'aud',
+  vid: 'vid',
+  txt: 'txt',
+  ar:  'ar',
+  bin: 'bin',
 };
 
-function getIconComponent(typeKey: string): LucideIcon {
-  for (const [prefix, Icon] of Object.entries(TYPE_ICONS)) {
-    if (typeKey.startsWith(prefix)) return Icon;
+function getTypeSvg(typeKey: string): string {
+  for (const [prefix, name] of Object.entries(TYPE_SVG)) {
+    if (typeKey.startsWith(prefix)) return name;
   }
-  return File;
+  return 'file';
 }
 
-export default function FileIcon({ href, isFolder, size, thumbSrc }: Props) {
+const BASE = '/images/themes/default';
+
+export default function FileIcon({ href, isFolder, size, thumbSrc, isParent }: Props) {
   const typeKey = useFileType(href);
 
   if (thumbSrc) {
@@ -36,16 +35,20 @@ export default function FileIcon({ href, isFolder, size, thumbSrc }: Props) {
       <img
         src={thumbSrc}
         alt=""
-        style={{ width: size, height: size, objectFit: 'cover', borderRadius: 3 }}
+        style={{ width: size, height: size, objectFit: 'cover', borderRadius: 2 }}
         loading="lazy"
       />
     );
   }
 
   if (isFolder) {
-    return <Folder size={size} color="var(--folder-color)" fill="var(--folder-fill)" />;
+    const src = isParent
+      ? `${BASE}/folder-parent.svg`
+      : `${BASE}/folder.svg`;
+    return <img src={src} alt="" width={size} height={size} style={{ display: 'block' }} />;
   }
 
-  const Icon = getIconComponent(typeKey);
-  return <Icon size={size} />;
+  const src = `${BASE}/${getTypeSvg(typeKey)}.svg`;
+  return <img src={src} alt="" width={size} height={size} style={{ display: 'block' }} />;
 }
+

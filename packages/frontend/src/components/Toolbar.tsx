@@ -1,20 +1,15 @@
-import {
-  LayoutList,
-  Grid2x2,
-  Images,
-  Download,
-  PanelLeft,
-  Search,
-  Filter,
-  LogIn,
-  LogOut,
-  RefreshCw,
-} from 'lucide-react';
 import { useStore } from '../store';
 import { apiLogout } from '../api/client';
 import { downloadArchive } from '../api/client';
 import type { ViewMode } from '../store';
 import styles from './Toolbar.module.css';
+
+const UI = '/images/ui';
+
+/** 24×24 toolbar icon using original h5ai SVG assets */
+function Icon({ name, alt = '' }: { name: string; alt?: string }) {
+  return <img src={`${UI}/${name}.svg`} alt={alt} width={24} height={24} style={{ display: 'block' }} />;
+}
 
 export default function Toolbar() {
   const {
@@ -26,9 +21,9 @@ export default function Toolbar() {
   } = useStore();
 
   const modes: { mode: ViewMode; icon: React.ReactNode; label: string }[] = [
-    { mode: 'details', icon: <LayoutList size={16} />, label: l10n['details'] ?? 'Details' },
-    { mode: 'grid', icon: <Grid2x2 size={16} />, label: l10n['grid'] ?? 'Grid' },
-    { mode: 'icons', icon: <Images size={16} />, label: l10n['icons'] ?? 'Icons' },
+    { mode: 'details', icon: <Icon name="view-details" />, label: l10n['details'] ?? 'Details' },
+    { mode: 'grid', icon: <Icon name="view-grid" />, label: l10n['grid'] ?? 'Grid' },
+    { mode: 'icons', icon: <Icon name="view-icons" />, label: l10n['icons'] ?? 'Icons' },
   ];
 
   const availableModes = options?.view.modes ?? ['details', 'grid', 'icons'];
@@ -70,7 +65,7 @@ export default function Toolbar() {
             onClick={() => setSidebarOpen(!sidebarOpen)}
             title="Toggle sidebar"
           >
-            <PanelLeft size={16} />
+            <Icon name="sidebar" />
           </button>
         )}
       </div>
@@ -80,7 +75,7 @@ export default function Toolbar() {
       <div className={styles.right}>
         {showDownload && (
           <button className={styles.btn} onClick={handleDownload} title={l10n['download'] ?? 'Download'}>
-            <Download size={16} />
+            <Icon name="download" />
             {selectedHrefs.size > 0 && (
               <span className={styles.badge}>{selectedHrefs.size}</span>
             )}
@@ -116,11 +111,11 @@ export default function Toolbar() {
 
         {setup?.isAdmin ? (
           <button className={styles.btn} onClick={handleLogout} title="Logout">
-            <LogOut size={16} />
+            <Icon name="back" alt="Logout" />
           </button>
         ) : (
           <a href="/login" className={styles.btn} title="Login">
-            <LogIn size={16} />
+            <Icon name="info-toggle" alt="Login" />
           </a>
         )}
       </div>

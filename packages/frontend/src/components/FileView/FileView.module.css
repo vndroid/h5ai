@@ -33,7 +33,7 @@
 }
 
 .thIcon {
-  width: calc(var(--size, 40px) + 32px);
+  width: 36px;
 }
 
 .th {
@@ -52,6 +52,7 @@
 
 .th:hover { opacity: 1; color: var(--col-blue-400); }
 .th.sorted { opacity: 1; color: var(--col-blue-400); }
+.th.right { text-align: right; padding-right: 16px; }
 .sortArrow { font-size: 10px; }
 
 .empty {
