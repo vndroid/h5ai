@@ -1,73 +1,80 @@
-# h5ai
+# h5ai-next
 
-[![license][license-img]][github] [![web][web-img]][web] [![github][github-img]][github]
+Modern HTTP directory index — React + Fastify rewrite of [h5ai](https://larsjung.de/h5ai/).
 
-A modern HTTP web server index for Apache httpd, lighttpd, and nginx.
+## Tech Stack
 
+| Layer | Technology |
+|-------|-----------|
+| Frontend | React 18 + TypeScript + Vite |
+| Backend | Fastify 4 + TypeScript |
+| Shared types | `@h5ai/types` (local package) |
+| State | Zustand |
+| Icons | Lucide React |
+| Thumbnails | sharp + ffmpeg |
+| Archives | archiver (tar/zip) |
 
-## Important
+## Project Structure
 
-* Do **not** install any files from the `src` folder, they need to be
-  preprocessed to work correctly!
-* Find a preprocessed package and detailed install instructions on the
-  [project page][web].
-* For bug reports and feature requests please use [issues][github-issues].
+```
+packages/
+  types/      # Shared TypeScript types (API request/response, options)
+  backend/    # Fastify server — file listing, thumbnails, auth, search, download
+  frontend/   # React + Vite SPA — file browser UI
+```
 
+## Getting Started
 
-## Build
+### 1. Install dependencies
 
-There are installation ready packages for the latest [releases][release] and
-[dev builds][develop]. But to build **h5ai** yourself either `git clone` or
-download the repository. From within the root folder run the following
-commands to find a fresh zipball in folder `build` (tested on linux only,
-requires [`node 10.0+`][node] to be installed, might work on other
-configurations).
+```bash
+npm install
+```
 
-~~~sh
-> npm install
-> npm run build
-~~~
+### 2. Configure
 
+Edit `packages/backend/conf/options.json` to set:
+- `passhash` — SHA-512 of your admin password (default: empty string)
+- `view.hidden` — patterns to hide files
+- Enable/disable extensions
 
-## License
+Set environment variables:
+```bash
+ROOT_PATH=/path/to/serve      # directory to browse (default: cwd)
+PORT=3000                      # backend port (default: 3000)
+SESSION_SECRET=changeme        # session signing secret
+```
 
-The MIT License (MIT)
+### 3. Run in development
 
-Copyright (c) 2020 Lars Jung (https://larsjung.de)
+```bash
+npm run dev
+```
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+- Backend: http://localhost:3000
+- Frontend dev server: http://localhost:5173 (proxies /api → backend)
 
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
+### 4. Build for production
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
+```bash
+npm run build
+```
 
+Serve `packages/frontend/dist/` as static files and run the backend.
 
-## References
+## Features
 
-**h5ai** profits from other projects, all of them licensed under the MIT license
-too. Exceptions are some [Material Design icons][material-design-icons] (CC BY 4.0).
-
-
-[web]: https://larsjung.de/h5ai/
-[github]: https://github.com/lrsjng/h5ai
-[github-issues]: https://github.com/lrsjng/h5ai/issues
-[release]: https://release.larsjung.de/h5ai/
-[develop]: https://release.larsjung.de/h5ai/develop/
-[node]: https://nodejs.org
-[material-design-icons]: https://github.com/google/material-design-icons
-
-[license-img]: https://img.shields.io/badge/license-MIT-a0a060.svg?style=flat-square
-[web-img]: https://img.shields.io/badge/web-larsjung.de/h5ai-a0a060.svg?style=flat-square
-[github-img]: https://img.shields.io/badge/github-lrsjng/h5ai-a0a060.svg?style=flat-square
+- ✅ File/folder listing (details, grid, icons view modes)
+- ✅ Sort by name, date, size
+- ✅ Real-time filter
+- ✅ File search (regex-capable)
+- ✅ Multi-select + packaged download (tar.gz / zip)
+- ✅ Thumbnail generation (images via sharp, videos via ffmpeg)
+- ✅ File preview (image, video, audio, text/code)
+- ✅ Folder tree sidebar
+- ✅ Breadcrumb navigation
+- ✅ Custom header/footer (HTML or Markdown per-directory)
+- ✅ Localization (32 languages)
+- ✅ Password authentication
+- ✅ Dark mode (system preference)
+- ✅ Responsive layout

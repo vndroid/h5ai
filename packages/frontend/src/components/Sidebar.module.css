@@ -1,0 +1,54 @@
+.sidebar {
+  width: 220px;
+  flex-shrink: 0;
+  border-right: 1px solid var(--border);
+  overflow-y: auto;
+  background: var(--sidebar-bg);
+  padding: 8px 0;
+}
+
+.nodeWrap { display: flex; flex-direction: column; }
+
+.node {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding-right: 8px;
+}
+
+.node:hover { background: var(--hover-bg); }
+.node.current { background: var(--selected-bg); }
+
+.toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  padding: 2px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+.toggle:hover { color: var(--fg); }
+
+.label {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--fg);
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 4px;
+  border-radius: 3px;
+  flex: 1;
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.label:hover { color: var(--accent); }
+
+.folderIcon { color: var(--folder-color); flex-shrink: 0; }

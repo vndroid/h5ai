@@ -1,0 +1,38 @@
+.row {
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  transition: background 0.1s;
+}
+
+.row:hover { background: var(--hover-bg); }
+.row.selected { background: var(--selected-bg); }
+
+.iconCell {
+  padding: 4px 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.checkbox { cursor: pointer; }
+
+.name {
+  padding: 4px 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.nameText {
+  font-size: 13px;
+  color: var(--fg);
+}
+
+.date, .size {
+  padding: 4px 8px;
+  font-size: 12px;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.size { text-align: right; }

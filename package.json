@@ -1,31 +1,22 @@
 {
-  "name": "h5ai",
-  "version": "0.30.0",
-  "description": "Modern HTTP web server index.",
-  "homepage": "https://larsjung.de/h5ai/",
-  "author": "Lars Jung <lrsjng@gmail.com> (https://larsjung.de)",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/lrsjng/h5ai.git"
-  },
+  "name": "h5ai-next",
+  "version": "1.0.0",
+  "description": "Modern HTTP web server index — React + Fastify rewrite",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
-    "lint": "eslint .",
-    "test": "node test",
-    "build": "node ghu release",
-    "precommit": "npm run -s lint && npm run -s test"
+    "dev": "concurrently -n backend,frontend -c cyan,magenta \"npm run dev -w packages/backend\" \"npm run dev -w packages/frontend\"",
+    "build": "npm run build -w packages/types && npm run build -w packages/backend && npm run build -w packages/frontend",
+    "lint": "eslint packages/*/src --ext .ts,.tsx",
+    "typecheck": "tsc -b packages/types packages/backend packages/frontend"
   },
   "devDependencies": {
-    "@babel/core": "7.12.10",
-    "@babel/preset-env": "7.12.11",
-    "eslint": "7.18.0",
-    "ghu": "0.26.0",
-    "jsdom": "16.4.0",
-    "kjua": "0.9.0",
-    "lolight": "1.4.0",
-    "marked": "4.0.10",
-    "normalize.css": "8.0.1",
-    "null-loader": "4.0.1",
-    "scar": "2.3.0"
+    "@typescript-eslint/eslint-plugin": "^7.0.0",
+    "@typescript-eslint/parser": "^7.0.0",
+    "concurrently": "^8.2.2",
+    "eslint": "^8.57.0",
+    "typescript": "^5.4.5"
   }
 }

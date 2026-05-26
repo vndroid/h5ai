@@ -1,0 +1,75 @@
+{
+  "passhash": "cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e",
+  "resources": {
+    "scripts": [],
+    "styles": []
+  },
+  "view": {
+    "binaryPrefix": false,
+    "disableSidebar": false,
+    "fallbackMode": false,
+    "fastBrowsing": true,
+    "fonts": ["Ubuntu", "Roboto", "Helvetica", "Arial", "sans-serif"],
+    "fontsMono": ["Ubuntu Mono", "Monaco", "Lucida Sans Typewriter", "monospace"],
+    "hidden": ["^\\.", "^_h5ai"],
+    "hideFolders": false,
+    "hideIf403": true,
+    "hideParentFolder": false,
+    "maxIconSize": 40,
+    "modes": ["details", "grid", "icons"],
+    "modeToggle": false,
+    "setParentFolderLabels": true,
+    "sizes": [20, 40, 60, 80, 100, 140, 180, 220, 260, 300],
+    "theme": "default",
+    "unmanaged": ["index.html", "index.htm", "index.php"],
+    "unmanagedInNewWindow": false
+  },
+  "autorefresh": { "enabled": false, "interval": 5000 },
+  "crumb": { "enabled": true },
+  "custom": { "enabled": true, "stopSearchingAtRoot": true },
+  "download": {
+    "enabled": true,
+    "type": "shell-tar",
+    "packageName": null,
+    "alwaysVisible": false
+  },
+  "filter": {
+    "enabled": true,
+    "advanced": true,
+    "debounceTime": 100,
+    "ignorecase": true
+  },
+  "foldersize": { "enabled": false, "type": "php" },
+  "info": { "enabled": true, "show": false, "qrcode": true, "qrFill": "#999", "qrBack": "#fff" },
+  "l10n": { "enabled": true, "lang": "en", "useBrowserLang": true },
+  "preview-aud": { "enabled": true, "autoplay": true, "types": ["aud"] },
+  "preview-img": {
+    "enabled": true,
+    "size": false,
+    "types": ["img", "img-bmp", "img-gif", "img-ico", "img-jpg", "img-png", "img-raw", "img-svg"]
+  },
+  "preview-txt": {
+    "enabled": true,
+    "style": 1,
+    "types": [
+      "txt", "txt-authors", "txt-license", "txt-makefile", "txt-markdown",
+      "txt-diff", "txt-php", "txt-python", "txt-ruby", "txt-script",
+      "txt-xml", "txt-yaml"
+    ]
+  },
+  "preview-vid": { "enabled": true, "autoplay": true, "types": ["vid"] },
+  "search": { "enabled": true, "advanced": true, "debounceTime": 200, "ignorecase": true },
+  "select": { "enabled": true, "clickndrag": true, "checkboxes": true },
+  "sort": { "enabled": true, "column": "name", "reverse": false },
+  "thumbnails": {
+    "enabled": true,
+    "img": true,
+    "mov": true,
+    "doc": false,
+    "delay": 1,
+    "size": 40,
+    "exif": false,
+    "chunksize": 20
+  },
+  "tree": { "enabled": true, "slide": false }
+}

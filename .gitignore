@@ -1,8 +1,10 @@
-/.nyc_output/
-/build/
-/coverage/
-/local/
-/node_modules/
-/npm-debug.log
+cache/thumbs/*.jpg
+cache/thumbs/*.png
+cache/thumbs/*.webp
+packages/*/dist/
+packages/*/node_modules/
+node_modules/
+*.log
+.env
 .DS_Store
 .idea

@@ -1,0 +1,85 @@
+/* ── CSS Custom Properties ─────────────────────────────────────────────── */
+:root {
+  --bg: #ffffff;
+  --surface: #f8f9fa;
+  --sidebar-bg: #f4f5f6;
+  --topbar-bg: #ffffff;
+  --fg: #1a1a1a;
+  --muted: #6b7280;
+  --border: #e5e7eb;
+  --hover-bg: #f3f4f6;
+  --selected-bg: #eff6ff;
+  --input-bg: #ffffff;
+  --accent: #3b82f6;
+  --accent-fg: #ffffff;
+  --error: #ef4444;
+  --folder-color: #f59e0b;
+  --folder-fill: #fde68a;
+  --font-mono: "Fira Code", "Cascadia Code", "Ubuntu Mono", Consolas, monospace;
+
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #111827;
+    --surface: #1f2937;
+    --sidebar-bg: #1a2332;
+    --topbar-bg: #111827;
+    --fg: #f9fafb;
+    --muted: #9ca3af;
+    --border: #374151;
+    --hover-bg: #1f2937;
+    --selected-bg: #1e3a5f;
+    --input-bg: #1f2937;
+    --accent: #60a5fa;
+    --accent-fg: #0f172a;
+    --error: #f87171;
+    --folder-color: #fbbf24;
+    --folder-fill: #78350f;
+  }
+}
+
+/* ── Reset ─────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  background: var(--bg);
+  color: var(--fg);
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+button { font-family: inherit; }
+
+/* ── Loading screen ─────────────────────────────────────────────────────── */
+.loading-screen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.loading-spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── Scrollbar ──────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--muted); }

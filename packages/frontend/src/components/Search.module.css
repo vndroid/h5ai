@@ -1,0 +1,45 @@
+.wrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 4px 10px;
+  background: var(--input-bg);
+  min-width: 180px;
+}
+
+.icon { color: var(--muted); flex-shrink: 0; }
+
+.input {
+  border: none;
+  background: transparent;
+  outline: none;
+  color: var(--fg);
+  font-size: 13px;
+  flex: 1;
+  min-width: 0;
+}
+
+.spinner {
+  width: 12px;
+  height: 12px;
+  border: 2px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.clear {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+}
+.clear:hover { color: var(--fg); }

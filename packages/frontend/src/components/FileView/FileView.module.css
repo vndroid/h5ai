@@ -1,0 +1,65 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.controls {
+  display: flex;
+  gap: 8px;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+
+/* ── Details table ── */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  table-layout: fixed;
+}
+
+.table thead {
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  z-index: 10;
+}
+
+.thIcon {
+  width: calc(var(--size, 40px) + 20px);
+}
+
+.th {
+  padding: 6px 8px;
+  text-align: left;
+  font-weight: 500;
+  color: var(--muted);
+  cursor: pointer;
+  user-select: none;
+  border-bottom: 2px solid var(--border);
+  white-space: nowrap;
+}
+
+.th:hover { color: var(--fg); }
+.th.sorted { color: var(--accent); }
+.sortArrow { font-size: 10px; }
+
+.empty {
+  padding: 40px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* ── Grid / Icons ── */
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 12px;
+}
+
+.icons {
+  gap: 16px;
+}
