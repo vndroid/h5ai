@@ -1,45 +1,58 @@
+/* Match original .item in view-grid — floating cards */
 .card {
+  overflow: hidden;
+  margin: 8px;
+  cursor: pointer;
+  border-radius: 2px;
+  background: var(--col-back-paper);
+  transition: box-shadow 0.15s ease;
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 4px 8px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background 0.1s;
-  max-width: 200px;
-  overflow: hidden;
 }
 
-.card:hover { background: var(--hover-bg); }
-.card.selected { background: var(--selected-bg); }
+.card:hover {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  color: var(--col-blue-400);
+}
 
+.card.selected { background: var(--col-selected-bg); }
+
+/* Icon square */
 .iconWrap {
-  flex-shrink: 0;
-  width: var(--icon-size, 40px);
-  height: var(--icon-size, 40px);
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
+  width: var(--icon-size, 48px);
+  height: var(--icon-size, 48px);
 }
 
+/* Label beside icon in grid mode */
 .label {
-  font-size: 12px;
+  display: inline-block;
+  width: 160px;
+  padding: 0 8px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  flex: 1;
+  font-size: 13px;
+  line-height: var(--icon-size, 48px);
+  color: inherit;
 }
 
-/* Icon mode: vertical layout */
+/* Icons mode: stack vertically */
 .iconMode {
   flex-direction: column;
   align-items: center;
-  width: calc(var(--icon-size, 60px) * 1.4);
-  max-width: 200px;
-  padding: 8px;
+  width: calc(var(--icon-size, 60px) + 24px);
 }
 
 .iconMode .label {
-  text-align: center;
   width: 100%;
+  text-align: center;
+  line-height: 1.4;
+  padding: 4px 4px 8px;
+  white-space: normal;
+  word-break: break-word;
 }
+

@@ -1,42 +1,57 @@
+/* Match original #crumbbar — 48px height, inline segments */
 .crumb {
+  overflow: hidden;
+  height: 48px;
+  font-size: 16px;
+  padding: 0 8px;
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
-  padding: 4px 12px 6px;
-  gap: 2px;
-  font-size: 13px;
+  flex-wrap: nowrap;
+  flex: 1 1 auto;
 }
 
 .item {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 2px;
 }
 
 .sep {
-  color: var(--muted);
+  width: 24px;
+  height: 24px;
+  line-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--col-text-dis);
+  font-size: 12px;
+  flex-shrink: 0;
+}
+
+.item:first-child .sep {
+  display: none;
 }
 
 .segment {
-  background: none;
-  border: none;
-  padding: 2px 4px;
-  border-radius: 3px;
-  color: var(--accent);
-  cursor: pointer;
-  font-size: 13px;
-  transition: background 0.1s;
+  line-height: 48px;
   display: inline-flex;
   align-items: center;
   gap: 4px;
+  padding: 0 8px;
+  background: none;
+  border: none;
+  color: var(--col-text);
+  cursor: pointer;
+  font-size: 16px;
+  font-family: inherit;
+  transition: color 0.15s ease;
+  white-space: nowrap;
 }
 
 .segment:hover {
-  background: var(--hover-bg);
+  color: var(--col-blue-400);
 }
 
 .current {
-  color: var(--fg);
-  padding: 2px 4px;
-  font-weight: 500;
+  font-weight: bold;
+  color: var(--col-text);
 }

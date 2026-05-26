@@ -1,43 +1,43 @@
-/* ── CSS Custom Properties ─────────────────────────────────────────────── */
+/* ── Original h5ai color palette (Material Design light) ──────────────── */
 :root {
-  --bg: #ffffff;
-  --surface: #f8f9fa;
-  --sidebar-bg: #f4f5f6;
-  --topbar-bg: #ffffff;
-  --fg: #1a1a1a;
-  --muted: #6b7280;
-  --border: #e5e7eb;
-  --hover-bg: #f3f4f6;
-  --selected-bg: #eff6ff;
-  --input-bg: #ffffff;
-  --accent: #3b82f6;
-  --accent-fg: #ffffff;
-  --error: #ef4444;
-  --folder-color: #f59e0b;
-  --folder-fill: #fde68a;
-  --font-mono: "Fira Code", "Cascadia Code", "Ubuntu Mono", Consolas, monospace;
+  --col-white:       #ffffff;
+  --col-grey-50:     #fafafa;
+  --col-grey-100:    #f5f5f5;
+  --col-grey-300:    #e0e0e0;
+  --col-grey-700:    #616161;
+  --col-grey-900:    #212121;
+  --col-blue-400:    #42a5f5;
+  --col-pink-a200:   #ff4081;
 
-  color-scheme: light dark;
-}
+  --col-text:        rgba(0, 0, 0, 0.87);
+  --col-text-sec:    rgba(0, 0, 0, 0.54);
+  --col-text-dis:    rgba(0, 0, 0, 0.26);
+  --col-back:        #ffffff;
+  --col-back-paper:  #ffffff;
+  --col-back-panel:  #fafafa;
+  --col-back-hover:  rgba(0, 0, 0, 0.03);
+  --col-border:      rgba(0, 0, 0, 0.05);
+  --col-border-str:  rgba(0, 0, 0, 0.15);
+  --col-link:        #42a5f5;
+  --col-link-hover:  #212121;
+  --col-selected:    #42a5f5;
+  --col-selected-bg: rgba(66, 165, 245, 0.12);
+  --col-range-back:  #e0e0e0;
+  --col-range-thumb: #616161;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #111827;
-    --surface: #1f2937;
-    --sidebar-bg: #1a2332;
-    --topbar-bg: #111827;
-    --fg: #f9fafb;
-    --muted: #9ca3af;
-    --border: #374151;
-    --hover-bg: #1f2937;
-    --selected-bg: #1e3a5f;
-    --input-bg: #1f2937;
-    --accent: #60a5fa;
-    --accent-fg: #0f172a;
-    --error: #f87171;
-    --folder-color: #fbbf24;
-    --folder-fill: #78350f;
-  }
+  /* aliases for component use */
+  --bg:          var(--col-back);
+  --surface:     var(--col-back-panel);
+  --fg:          var(--col-text);
+  --muted:       var(--col-text-sec);
+  --accent:      var(--col-blue-400);
+  --accent-fg:   #ffffff;
+  --border:      var(--col-border);
+  --hover-bg:    var(--col-back-hover);
+  --selected-bg: var(--col-selected-bg);
+  --folder-color: #ffb300;
+  --folder-fill:  #fff9c4;
+  --font-size:   13px;
 }
 
 /* ── Reset ─────────────────────────────────────────────────────────────── */
@@ -47,17 +47,30 @@ html, body, #root {
   margin: 0;
   padding: 0;
   height: 100%;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  font-size: 14px;
-  background: var(--bg);
-  color: var(--fg);
+}
+
+body, input, select {
+  font-family: "Ubuntu", "Roboto", "Helvetica", "Arial", sans-serif;
+  font-size: var(--font-size);
+  font-weight: normal;
+  color: var(--col-text);
+  background: var(--col-back);
   -webkit-font-smoothing: antialiased;
 }
 
-a { color: var(--accent); text-decoration: none; }
-a:hover { text-decoration: underline; }
+a { color: var(--col-link); text-decoration: none; }
+a:hover { color: var(--col-link-hover); }
+a:focus { outline: 0; }
 
-button { font-family: inherit; }
+button { font-family: inherit; cursor: pointer; }
+
+*:focus { outline: none; }
+
+::selection {
+  color: #ffffff;
+  background: var(--col-pink-a200);
+  text-shadow: none;
+}
 
 /* ── Loading screen ─────────────────────────────────────────────────────── */
 .loading-screen {
@@ -65,13 +78,14 @@ button { font-family: inherit; }
   align-items: center;
   justify-content: center;
   min-height: 100vh;
+  background: var(--col-back);
 }
 
 .loading-spinner {
-  width: 36px;
-  height: 36px;
-  border: 3px solid var(--border);
-  border-top-color: var(--accent);
+  width: 32px;
+  height: 32px;
+  border: 3px solid var(--col-grey-300);
+  border-top-color: var(--col-blue-400);
   border-radius: 50%;
   animation: spin 0.7s linear infinite;
 }
@@ -81,5 +95,6 @@ button { font-family: inherit; }
 /* ── Scrollbar ──────────────────────────────────────────────────────────── */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: var(--muted); }
+::-webkit-scrollbar-thumb { background: var(--col-grey-300); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--col-grey-700); }
+

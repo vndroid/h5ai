@@ -1,14 +1,27 @@
+/* Match original .item in view-details */
 .row {
-  border-bottom: 1px solid var(--border);
+  position: relative;
+  white-space: nowrap;
+  background: var(--col-back-paper);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
   cursor: pointer;
-  transition: background 0.1s;
+  transition: background 0.1s ease, box-shadow 0.1s ease;
 }
 
-.row:hover { background: var(--hover-bg); }
-.row.selected { background: var(--selected-bg); }
+.row:hover {
+  background: var(--col-back-panel);
+  color: var(--col-blue-400);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+  z-index: 1;
+}
 
+.row.selected {
+  background: var(--col-selected-bg);
+}
+
+/* Icon cell — absolute positioned .square in original */
 .iconCell {
-  padding: 4px 8px;
+  padding: 8px 8px 8px 16px;
   display: flex;
   align-items: center;
   gap: 6px;
@@ -16,8 +29,9 @@
 
 .checkbox { cursor: pointer; }
 
+/* Name cell */
 .name {
-  padding: 4px 8px;
+  padding: 0 8px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -25,14 +39,27 @@
 
 .nameText {
   font-size: 13px;
-  color: var(--fg);
+  color: inherit;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.date, .size {
-  padding: 4px 8px;
-  font-size: 12px;
-  color: var(--muted);
+/* Date + size: right-aligned, fixed widths like original */
+.date {
+  padding: 0 8px;
+  font-size: 13px;
+  color: var(--col-text-sec);
   white-space: nowrap;
+  width: 130px;
+  text-align: right;
 }
 
-.size { text-align: right; }
+.size {
+  padding: 0 8px;
+  font-size: 13px;
+  color: var(--col-text-sec);
+  white-space: nowrap;
+  width: 80px;
+  text-align: right;
+}

@@ -1,28 +1,36 @@
+/* Match original #root + #topbar + #mainrow + #content layout */
 .root {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
-  background: var(--bg);
-  color: var(--fg);
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  background: var(--col-back);
+  line-height: 1.4;
 }
 
 .topbar {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background: var(--topbar-bg);
-  border-bottom: 1px solid var(--border);
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+  flex: 0 0 auto;
+  background: var(--col-back-panel);
+  border-bottom: 1px solid var(--col-border);
+  z-index: 1;
 }
 
 .mainrow {
   display: flex;
-  flex: 1;
-  overflow: hidden;
+  flex-direction: row;
+  flex: 1 1 auto;
+  height: 0; /* non-webkit fix */
 }
 
 .content {
-  flex: 1;
   overflow: auto;
-  padding: 0;
+  flex: 1 1 auto;
+  position: relative;
 }

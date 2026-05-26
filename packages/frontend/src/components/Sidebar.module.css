@@ -1,10 +1,12 @@
+/* Match original #sidebar — 168px wide block with padding 16px */
 .sidebar {
-  width: 220px;
-  flex-shrink: 0;
-  border-right: 1px solid var(--border);
+  overflow-x: hidden;
   overflow-y: auto;
-  background: var(--sidebar-bg);
-  padding: 8px 0;
+  flex: 0 0 auto;
+  width: 200px;
+  background: var(--col-back-panel);
+  border-right: 1px solid var(--col-border);
+  padding: 16px;
 }
 
 .nodeWrap { display: flex; flex-direction: column; }
@@ -12,43 +14,43 @@
 .node {
   display: flex;
   align-items: center;
-  gap: 4px;
-  padding-right: 8px;
+  border-radius: 2px;
+  transition: background 0.1s ease;
 }
 
-.node:hover { background: var(--hover-bg); }
-.node.current { background: var(--selected-bg); }
+.node:hover { background: var(--col-back-hover); }
+
+.node.current { background: var(--col-selected-bg); }
 
 .toggle {
   background: none;
   border: none;
-  cursor: pointer;
-  color: var(--muted);
+  color: var(--col-text-sec);
   display: flex;
   align-items: center;
   padding: 2px;
-  border-radius: 2px;
   flex-shrink: 0;
+  transition: color 0.1s ease;
 }
-.toggle:hover { color: var(--fg); }
+.toggle:hover { color: var(--col-text); }
 
 .label {
   background: none;
   border: none;
-  cursor: pointer;
-  color: var(--fg);
-  font-size: 12px;
+  color: var(--col-text);
+  font-size: 13px;
+  font-family: inherit;
   display: flex;
   align-items: center;
-  gap: 4px;
-  padding: 3px 4px;
-  border-radius: 3px;
+  gap: 6px;
+  padding: 4px 4px;
   flex: 1;
   text-align: left;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  transition: color 0.1s ease;
 }
-.label:hover { color: var(--accent); }
+.label:hover { color: var(--col-blue-400); }
 
 .folderIcon { color: var(--folder-color); flex-shrink: 0; }

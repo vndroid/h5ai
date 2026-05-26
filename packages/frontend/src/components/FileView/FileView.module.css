@@ -1,3 +1,4 @@
+/* Match original #view + view-details + view-grid */
 .container {
   display: flex;
   flex-direction: column;
@@ -5,61 +6,74 @@
 
 .controls {
   display: flex;
-  gap: 8px;
-  padding: 8px 12px;
-  border-bottom: 1px solid var(--border);
+  align-items: center;
+  gap: 0;
+  padding: 0;
+  border-bottom: 1px solid var(--col-border);
   flex-wrap: wrap;
+  height: 48px;
+  overflow: hidden;
 }
 
-/* ── Details table ── */
+/* ── Details view header ── */
 .table {
   width: 100%;
   border-collapse: collapse;
   font-size: 13px;
   table-layout: fixed;
+  margin: 32px 32px 0 32px;
+  width: calc(100% - 64px);
 }
 
 .table thead {
   position: sticky;
   top: 0;
-  background: var(--bg);
+  background: var(--col-back);
   z-index: 10;
 }
 
 .thIcon {
-  width: calc(var(--size, 40px) + 20px);
+  width: calc(var(--size, 40px) + 32px);
 }
 
 .th {
-  padding: 6px 8px;
+  padding: 0 8px 16px 8px;
   text-align: left;
-  font-weight: 500;
-  color: var(--muted);
+  font-weight: normal;
+  color: var(--col-text-sec);
   cursor: pointer;
   user-select: none;
-  border-bottom: 2px solid var(--border);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
   white-space: nowrap;
+  opacity: 0.4;
+  transition: opacity 0.15s ease, color 0.15s ease;
+  line-height: 24px;
 }
 
-.th:hover { color: var(--fg); }
-.th.sorted { color: var(--accent); }
+.th:hover { opacity: 1; color: var(--col-blue-400); }
+.th.sorted { opacity: 1; color: var(--col-blue-400); }
 .sortArrow { font-size: 10px; }
 
 .empty {
-  padding: 40px;
+  padding: 40px 32px;
   text-align: center;
-  color: var(--muted);
-  font-size: 14px;
+  color: var(--col-text-dis);
+  font-size: 3em;
+  font-weight: bold;
 }
 
-/* ── Grid / Icons ── */
+/* ── Grid view ── */
 .grid {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  padding: 12px;
+  padding: 28px;
+  gap: 0;
 }
 
+/* ── Icons view ── */
 .icons {
-  gap: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 28px;
+  gap: 0;
 }

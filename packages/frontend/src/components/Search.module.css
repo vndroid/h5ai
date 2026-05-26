@@ -1,34 +1,49 @@
+/* Match original #search — inline 48px toolbar input */
 .wrap {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 6px;
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 4px 10px;
-  background: var(--input-bg);
-  min-width: 180px;
+  height: 48px;
+  overflow: hidden;
 }
 
-.icon { color: var(--muted); flex-shrink: 0; }
+.icon {
+  color: var(--col-text-sec);
+  flex-shrink: 0;
+  padding: 12px;
+  cursor: pointer;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.1s ease;
+}
+.icon:hover { background: var(--col-back-hover); }
 
 .input {
   border: none;
   background: transparent;
-  outline: none;
-  color: var(--fg);
-  font-size: 13px;
-  flex: 1;
-  min-width: 0;
+  outline: 0;
+  color: var(--col-text);
+  font-size: 16px;
+  font-family: inherit;
+  width: 160px;
+  padding: 0 12px 0 4px;
+  line-height: 48px;
+  vertical-align: top;
 }
 
+.input::placeholder { color: var(--col-text-dis); }
+
 .spinner {
-  width: 12px;
-  height: 12px;
-  border: 2px solid var(--border);
-  border-top-color: var(--accent);
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--col-grey-300);
+  border-top-color: var(--col-blue-400);
   border-radius: 50%;
   animation: spin 0.6s linear infinite;
   flex-shrink: 0;
+  margin: 0 8px;
 }
 
 @keyframes spin { to { transform: rotate(360deg); } }
@@ -36,10 +51,11 @@
 .clear {
   background: none;
   border: none;
-  padding: 0;
+  padding: 8px;
   cursor: pointer;
-  color: var(--muted);
+  color: var(--col-text-sec);
   display: flex;
   align-items: center;
+  transition: color 0.1s ease;
 }
-.clear:hover { color: var(--fg); }
+.clear:hover { color: var(--col-text); }

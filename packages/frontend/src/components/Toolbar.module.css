@@ -1,65 +1,67 @@
+/* Match original #toolbar — 48px touch targets, image-size tools */
 .toolbar {
+  overflow: hidden;
+  flex: 0 0 auto;
+  height: 48px;
   display: flex;
   align-items: center;
-  padding: 4px 12px;
-  gap: 4px;
-  height: 40px;
 }
 
 .left, .right {
   display: flex;
   align-items: center;
-  gap: 4px;
 }
 
 .center { flex: 1; }
 
+/* Each tool button: 24px icon inside 48px target */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 4px;
-  padding: 4px 8px;
-  border: 1px solid transparent;
-  border-radius: 4px;
+  width: 48px;
+  height: 48px;
+  border: none;
   background: transparent;
-  color: var(--fg);
+  color: var(--col-text);
   cursor: pointer;
-  font-size: 13px;
-  transition: background 0.15s, border-color 0.15s;
+  transition: background 0.15s ease;
   position: relative;
   text-decoration: none;
+  flex-shrink: 0;
 }
 
 .btn:hover {
-  background: var(--hover-bg);
-  border-color: var(--border);
+  background: var(--col-back-hover);
 }
 
 .btn.active {
-  background: var(--accent);
-  color: var(--accent-fg);
-  border-color: var(--accent);
+  color: var(--col-blue-400);
 }
 
 .badge {
   position: absolute;
-  top: -4px;
-  right: -4px;
-  background: var(--accent);
-  color: var(--accent-fg);
+  top: 8px;
+  right: 8px;
+  background: var(--col-blue-400);
+  color: #fff;
   border-radius: 10px;
   font-size: 10px;
-  min-width: 16px;
-  height: 16px;
+  min-width: 14px;
+  height: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 0 3px;
 }
 
+/* Size slider — original uses 144px range input */
 .sizeSlider {
-  width: 80px;
-  accent-color: var(--accent);
+  width: 120px;
+  margin: 0 8px;
+  padding: 8px;
+  vertical-align: middle;
+  height: 32px;
+  accent-color: var(--col-grey-700);
   cursor: pointer;
 }
