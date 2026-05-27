@@ -75,10 +75,9 @@ export default function Sidebar({ currentHref, onNavigate }: Props) {
             aria-label={isExpanded ? 'Collapse' : 'Expand'}
           >
             <img
-              src="/images/ui/tree-toggle.svg"
+              src="/images/ui/tree-indicator.svg"
               alt=""
               width={16}
-              height={16}
               style={{ transform: isExpanded ? 'rotate(90deg)' : 'none', transition: 'transform 0.15s ease' }}
             />
           </button>
