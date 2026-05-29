@@ -50,11 +50,11 @@ class Setup {
         $this->set('MIN_PHP_VERSION', MIN_PHP_VERSION);
         $this->set('PHP_ARCH', (PHP_INT_SIZE * 8) . '-bit');
 
-        $this->set('REQUEST_METHOD', $_SERVER['REQUEST_METHOD']);
-        $this->set('REQUEST_HREF', parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
-        $this->set('SCRIPT_NAME', $_SERVER['SCRIPT_NAME']);
-        $this->set('SERVER_SOFTWARE', $_SERVER['SERVER_SOFTWARE']);
-        $this->set('HTTP_USER_AGENT', $_SERVER['HTTP_USER_AGENT']);
+        $this->set('REQUEST_METHOD', $_SERVER['REQUEST_METHOD'] ?? '');
+        $this->set('REQUEST_HREF', parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?: '/');
+        $this->set('SCRIPT_NAME', $_SERVER['SCRIPT_NAME'] ?? '');
+        $this->set('SERVER_SOFTWARE', $_SERVER['SERVER_SOFTWARE'] ?? '');
+        $this->set('HTTP_USER_AGENT', $_SERVER['HTTP_USER_AGENT'] ?? '');
     }
 
     private function add_php_checks() {
@@ -119,7 +119,7 @@ class Setup {
         $cmds_cache_path = Util::normalize_path($this->get('CACHE_PRV_PATH') . '/cmds.json', false);
 
         $cmds = Json::load($cmds_cache_path);
-        if (sizeof($cmds) === 0 || $this->refresh) {
+        if (count($cmds) === 0 || $this->refresh) {
             $cmds['command'] = Util::exec_0('command -v command');
             $cmds['which'] = Util::exec_0('which which') || Util::exec_0('which which.exe');
 

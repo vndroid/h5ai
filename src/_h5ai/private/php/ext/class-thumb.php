@@ -129,42 +129,46 @@ class Image {
         $this->release_source();
         $this->release_dest();
 
-        if (is_null($filename)) {
+        if ($filename === null) {
             return;
         }
 
         $this->source_file = $filename;
 
-        list($this->width, $this->height, $this->type) = @getimagesize($this->source_file);
+        $imageInfo = @getimagesize($this->source_file);
+        if (!$imageInfo || !$imageInfo[0] || !$imageInfo[1]) {
+            $this->source_file = null;
+            return;
+        }
+        [$this->width, $this->height, $this->type] = $imageInfo;
 
-        if (!$this->width || !$this->height) {
+        $imageData = file_get_contents($this->source_file);
+        $image = $imageData !== false ? imagecreatefromstring($imageData) : false;
+        if ($image === false) {
             $this->source_file = null;
             $this->width = null;
             $this->height = null;
             $this->type = null;
             return;
         }
-
-        $this->source = imagecreatefromstring(file_get_contents($this->source_file));
+        $this->source = $image;
     }
 
     public function save_dest_jpeg($filename, $quality = 80) {
-        if (!is_null($this->dest)) {
+        if ($this->dest !== null) {
             @imagejpeg($this->dest, $filename, $quality);
             @chmod($filename, 0775);
         }
     }
 
     public function release_dest() {
-        if (!is_null($this->dest)) {
-            @imagedestroy($this->dest);
+        if ($this->dest !== null) {
             $this->dest = null;
         }
     }
 
     public function release_source() {
-        if (!is_null($this->source)) {
-            @imagedestroy($this->source);
+        if ($this->source !== null) {
             $this->source_file = null;
             $this->source = null;
             $this->width = null;
@@ -174,7 +178,7 @@ class Image {
     }
 
     public function thumb($width, $height) {
-        if (is_null($this->source)) {
+        if ($this->source === null) {
             return;
         }
 
@@ -218,18 +222,21 @@ class Image {
     }
 
     public function rotate($angle) {
-        if (is_null($this->source) || ($angle !== 90 && $angle !== 180 && $angle !== 270)) {
+        if ($this->source === null || ($angle !== 90 && $angle !== 180 && $angle !== 270)) {
             return;
         }
 
-        $this->source = imagerotate($this->source, $angle, 0);
-        if ( $angle === 90 || $angle === 270 ) {
-            list($this->width, $this->height) = [$this->height, $this->width];
+        $rotated = imagerotate($this->source, $angle, 0);
+        if ($rotated !== false) {
+            $this->source = $rotated;
+        }
+        if ($angle === 90 || $angle === 270) {
+            [$this->width, $this->height] = [$this->height, $this->width];
         }
     }
 
     public function normalize_exif_orientation($exif_source_file = null) {
-        if (is_null($this->source) || !function_exists('exif_read_data')) {
+        if ($this->source === null || !function_exists('exif_read_data')) {
             return;
         }
 
@@ -238,7 +245,7 @@ class Image {
         }
 
         $exif = exif_read_data($exif_source_file);
-        switch (@$exif['Orientation']) {
+        switch ($exif !== false ? ($exif['Orientation'] ?? null) : null) {
             case 3:
                 $this->rotate(180);
                 break;

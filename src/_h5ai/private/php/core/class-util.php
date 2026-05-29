@@ -77,7 +77,7 @@ class Util {
         try {
             @exec($cmd, $lines, $rc);
             return $rc === 0;
-        } catch (Exception $e) {}
+        } catch (\Throwable $e) {}
         return false;
     }
 

@@ -270,11 +270,11 @@ class Context {
 
         $html = '<style class="x-head">';
 
-        if (sizeof($fonts) > 0) {
+        if (count($fonts) > 0) {
             $html .= '#root,input,select{font-family:"' . implode('","', $fonts) . '"!important}';
         }
 
-        if (sizeof($fonts_mono) > 0) {
+        if (count($fonts_mono) > 0) {
             $html .= 'pre,code{font-family:"' . implode('","', $fonts_mono) . '"!important}';
         }
 

@@ -30,8 +30,8 @@ class Json {
 
         for ($i = 0, $len = strlen($commented_json); $i < $len; $i += 1) {
             $char = $commented_json[$i];
-            $charchar = $char . @$commented_json[$i + 1];
-            $prevChar = @$commented_json[$i - 1];
+            $charchar = $char . ($i + 1 < $len ? $commented_json[$i + 1] : '');
+            $prevChar = $i > 0 ? $commented_json[$i - 1] : '';
 
             if (!$insideComment && $char === '"' && $prevChar !== "\\") {
                 $insideString = !$insideString;
